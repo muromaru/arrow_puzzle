@@ -1,7 +1,10 @@
-import { defineConfig } from 'vite';
+// vite.config.js の例
+import { defineConfig } from 'vite'
 
-// base: './' … 任意のサブパス（GitHub Pages など）に置いても動くようにする
 export default defineConfig({
-  base: './',
-  server: { host: true },
-});
+  // リポジトリ名が "arrow-puzzle" の場合
+  base: '/arrow-puzzle/', 
+  
+  // その他の設定...
+})
+
