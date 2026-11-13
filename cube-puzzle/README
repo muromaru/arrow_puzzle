@@ -1,0 +1,27 @@
+# Cube Puzzle
+
+立方体の表面の矢印をタップして射出し、すべて消すと クリア の3Dパズル（Three.js + Vite、PWA 対応）。
+
+## 開発
+
+```
+npm install
+npm run dev       # 開発サーバ（同じWi-FiのiPhoneから http://<PCのIP>:5173 で確認）
+npm test          # ロジックの単体テスト
+npm run build     # dist/ に本番ビルド
+npm run preview   # ビルド結果の確認
+```
+
+## PWA（ホーム画面追加・オフライン）
+
+`dist/` を **HTTPS** で公開すると PWA として動きます（Netlify / Cloudflare Pages / GitHub Pages など。`base: './'` のためサブパスでも可）。
+iPhone Safari で開き、共有ボタンから「ホーム画面に追加」します。初回表示でファイルがキャッシュされ、以降はオフラインでも起動します。
+更新は「次回起動時に反映」です。ファイルを変えたら `public/sw.js` の `CACHE` 名を上げてください。
+
+## 構成
+
+- `src/arrow.js` 矢印データ（面・方向・検証） / `src/puzzle.js` 射出判定・クリア判定・解の探索（描画非依存）
+- `src/stages.js` ステージ生成（seed から、面をまたぐ折れ線の矢印を敷き詰める。レベルは `levelParams()` の式と `SEEDS` で定義。増やすときは `LEVEL_COUNT` を上げ、`node tools/pick-seeds.mjs` で出た種を `SEEDS` に貼る）
+- `src/renderer.js` Three.js 描画 / `src/camera.js` カメラ / `src/input.js` タッチ・マウス
+- `src/game.js` 全体管理 / `src/ui.js` 画面UI / `src/save.js` セーブ / `src/pwa.js` Service Worker 登録
+- `tools/build-single.py` iPhone確認用の単一HTML生成 / `tools/make-icons.py` アイコン生成
