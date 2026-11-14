@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#dfe6ee" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1a2230" media="(prefers-color-scheme: dark)" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Cube Puzzle" />
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOmUyZjNlNDhjLTBmZTQtNGY2OS1hYThiLWRjZTEwZDNmNmRhNwAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNoLxRQIdg7RLV+nO5n3Za9ywAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6MTE4MTAzYTUtODEyOC00ZWQ0LTllMjgtODBmYmNhZGViZjlibHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaFbUWrQCIu9KVRzR0fIzhCUAAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYIKWf6VqArBU6bNoWACqThxE1PEXAZ56Ayd2mUlRSrThTpGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2gl8brS4+FPGMak5npMD2aeAAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFggbuOA8C0YBGyCO0FrBdil1aPb4hzY6J5u1KHdM5luF/JkbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYTplMmYzZTQ4Yy0wZmU0LTRmNjktYWE4Yi1kY2UxMGQzZjZkYTcvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDplZDM5ZGM0ZC1lZDYzLTQ4YzgtOWM0Zi0yZWUzMmQ0MTc0NzJyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggpZ/pWoCsFTps2hYAKpOHETU8RcBnnoDJ3aZSVFKtOFOiY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYIO/dNdpBvKD48rVNaKAZ2exAm89/Z2kOrNuRh8TB2wZ5omN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYIKMYf4+xT2JtQV9HY3zI2yMRHAMoN6f3XYy68JZnW1xNdGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2WECsAEOYnyG451bp5YgYZGI9VU21AS38Qlx6J3hjgCnOp/CThtZTJJrCCdTE5tVSswdKVhfX/ICxJ1r/cptYx+1pMRM3igAAA9xJREFUeNrt2L+rzXEcx/HP32GkTIabKBMTyqJMSizKwKJYb8mATmxSJrnKIiWTWC0m8S/Y/BW+dcLtur7ne773fL+fH+9HPQeynfPovN4+6dDhLWnfko9AcAgOwSE4BIfgEByCQ3AIDgkOwSE4BIfgEByCQ3AIDsEhwSE4BIfgEByCQ3AIjro7f+na1x8/u7o/+DTg+Mvi5ftPSxnLur8iAsfW3ftPdrPYXfdPcGDRV2QiyY6sLOzKJCwQgWPojliZWDg2wiIgkWRHrExEHBOx2EMEjug7EnNlUns7MieL3bW3Msl54RBpHEd2Fk0eIsl54RBpEEfG8yLIIZKcFw6RdnAUuyPtrUzCApG6cdS1I82sTMICkSpxNLAjVa9MwgKRanC0uiM1rkxZOAKyKPndPdkRK1MujipewWO+uyfnhUOkOBxYlH+IJOeFQ6QUHPeevvJNj2v7+U7jOC7cXNx6tPP283df9vDefPl2/dmLM9sP2sex7PHrj771IT1896FjsSwKDkTWYhERh5Xp35HoOBAZwiI0Diuz747AsbeAPyHdD0Y/Czgirkz/jsDRR6RtGcNZwBHoEFl5XsCxRs2szMDzAo7FuitTNZG1zgs4RhKJcF7AMb6KDpFx5wUci7ZX5uA7AkeDRDbOAo5GVmaDOwJHO0SmYwFHxSsz0Y7AMQmR6v6bCsdMOGZbmal3BI5pm2hlDvIKDkcpODZ+iMxzXsAxN5GKzgs4MjT6EJn5vIAjW2utTJbzAo5F3pVZSSTjeQHHouSVKWFH4CiOSIEs4Mi/MqXtCBwFVSwLOOCAAw444IADDjjggAMOOOCAAw444IADDjjggAMOOOCAAw444IADDjjggAMOOOCAAw444IADDjjggAMOOOCAAw444IADDjjggAMOOGrEcfryHTjGdfLG7cZxdB0/dxWOdTt28cr831QGHCX/hPjBKAJH19ET50ojUhqLI6fOZvyCcuL4QwSOf8vLohQcRR0iYc+LonEUcoiEPS8qwJH9EAl7XtSBI+/KBN+ROnDkIoJFNTjmX5ngO1IZjpmJYFEfjtlWJviOVIxjBiJY1I1j0pUJviMt4Jju3b3JV/CIOKZYmeA70hqOzb67N/kKHh3Hpg6RsOdF4zg2coiEPS9C4DjgIRL2vAiEY/QhEva8CIdjxCES9ryIiGPdlQm+IxFxDCeCRVAcQ1Ym+I6ExrGSCBbRcfSsTPAdgaOPCBZw/Hdlgu8IHH3v7k2+gsMhOASH4BAcgkNwCA7B4SMQHIJDcAgOwSE4BIfgEByCQ4JDcAgOwSE4BIfgEByCQ3BIv/sFlHQeGkLnJH4AAAAASUVORK5CYII=" />
+  <title>Cube Puzzle</title>
+  <style>
+:root {
+  --bg: #dfe6ee; --ink: #1d2636; --btn: #cbd5e1; --veil: rgba(223, 230, 238, 0.82);
+  box-sizing: border-box; color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #1a2230; --ink: #e6ebf2; --btn: #2c374a; --veil: rgba(26, 34, 48, 0.82); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #1a2230; --ink: #e6ebf2; --btn: #2c374a; --veil: rgba(26, 34, 48, 0.82); color-scheme: dark; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body {
+  margin: 0; width: 100%; height: 100%; overflow: hidden; overscroll-behavior: none;
+  background: var(--bg); color: var(--ink);
+  font-family: -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+}
+#view { display: block; width: 100%; height: 100%; touch-action: none; }
+#hud { position: fixed; top: 0; left: 0; right: 0; padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 0; font-size: 16px; pointer-events: none; }
+#hud strong { font-size: 22px; font-variant-numeric: tabular-nums; margin-left: 6px; }
+#bar { position: fixed; left: 0; right: 0; bottom: 0; display: flex; gap: 8px; padding: 8px 12px calc(env(safe-area-inset-bottom, 0px) + 12px); }
+button {
+  flex: 1; min-height: 44px; padding: 0 4px; font: inherit; font-size: 14px; white-space: nowrap; color: var(--ink);
+  background: var(--btn); border: 0; border-radius: 10px;
+}
+button.on { background: var(--ink); color: var(--bg); }
+#clear {
+  position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+  background: var(--veil); pointer-events: none;
+}
+#clear p { margin: 0; font-size: 34px; font-weight: 700; }
+#clear button { flex: none; padding: 0 24px; pointer-events: auto; }
+#clear:not([hidden]) p { animation: pop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.3) both; }
+@keyframes pop { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { #clear:not([hidden]) p { animation: none; } }
+button:disabled { opacity: 0.35; }
+#hud { display: flex; gap: 14px; align-items: baseline; }
+#hud #lv { font-weight: 700; font-size: 18px; }
+#reset {
+  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 8px); right: 12px;
+  flex: none; min-height: 36px; padding: 0 12px; font-size: 13px;
+}
+#pagePrev, #pageNext { flex: 0 0 40px; min-height: 0; align-self: stretch; padding: 0; }
+#levels { flex: 1; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+#levels button { min-height: 40px; padding: 0 2px; }
+</style>
+</head>
+<body>
+  <canvas id="view"></canvas>
+  <div id="hud"><span id="lv">Lv1</span><span>残り矢印<strong id="count">0</strong></span></div>
+  <button id="reset">↻ 新しい問題</button>
+  <div id="clear" hidden>
+    <p id="clear-text">クリア！</p>
+    <button id="next" hidden>次のレベル</button>
+  </div>
+  <nav id="bar">
+    <button id="pagePrev" aria-label="前の10レベル">◀</button>
+    <div id="levels"></div>
+    <button id="pageNext" aria-label="次の10レベル">▶</button>
+  </nav>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+if (typeof THREE === 'undefined') {document.getElementById('count').textContent = ' Three.jsを読み込めませんでした'; return; }
+// ---- arrow.js ----
+// 描画に依存しない矢印データ定義（Three.jsを使わない）。
+// 面ごとの法線 n、面内の右方向 u、上方向 v（いずれも整数ベクトル。u × v = n）。
+const FACES = {
+  '+x': { n: [1, 0, 0],  u: [0, 0, -1], v: [0, 1, 0] },
+  '-x': { n: [-1, 0, 0], u: [0, 0, 1],  v: [0, 1, 0] },
+  '+y': { n: [0, 1, 0],  u: [1, 0, 0],  v: [0, 0, -1] },
+  '-y': { n: [0, -1, 0], u: [1, 0, 0],  v: [0, 0, 1] },
+  '+z': { n: [0, 0, 1],  u: [1, 0, 0],  v: [0, 1, 0] },
+  '-z': { n: [0, 0, -1], u: [-1, 0, 0], v: [0, 1, 0] },
+};
+
+// 面内の4方向
+const DIRS = ['up', 'right', 'down', 'left'];
+
+const neg = (a) => a.map((c) => (c === 0 ? 0 : -c));
+
+function dirVector(face, dir) {
+  const f = FACES[face];
+  if (!f) throw new Error(`unknown face: ${face}`);
+  switch (dir) {
+    case 'up': return [...f.v];
+    case 'down': return neg(f.v);
+    case 'right': return [...f.u];
+    case 'left': return neg(f.u);
+    default: throw new Error(`unknown dir: ${dir}`);
+  }
+}
+
+// セル a → 隣接セル b の面内方向（隣接していなければ null）
+function dirBetween(face, a, b) {
+  const dv = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];
+  for (const dir of DIRS) {
+    const d = dirVector(face, dir);
+    if (d[0] === dv[0] && d[1] === dv[1] && d[2] === dv[2]) return dir;
+  }
+  return null;
+}
+
+// セル(x,y,z)が、指定した面の表層にあるか
+function isOnFace(size, x, y, z, face) {
+  const { n } = FACES[face];
+  const c = [x, y, z];
+  for (let i = 0; i < 3; i++) {
+    if (n[i] === 1) return c[i] === size - 1;
+    if (n[i] === -1) return c[i] === 0;
+  }
+  return false;
+}
+
+const same = (a, b) => a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
+
+// 面 face の上で、ベクトル v が表す方向（なければ null）
+function dirOfVector(face, v) {
+  return DIRS.find((d) => same(dirVector(face, d), v)) ?? null;
+}
+
+// 矢印 = 面の上のセル列（最後が頭）。面をまたぐときは「同じセルで面だけが変わる」。
+// cells[i] は3D整数座標、faces[i] はそのセルでの面。face / dir は頭の面と向き。
+function createArrow(id, faces, cells, dir) {
+  return { id, face: faces[faces.length - 1], faces, cells, dir, removed: false };
+}
+
+// 1歩の移動ベクトル: 同じ面なら座標の差。面をまたぐ歩は、前の面の法線と逆向きに進む。
+function stepVector(fromFace, from, toFace, to) {
+  return fromFace === toFace ? [to[0] - from[0], to[1] - from[1], to[2] - from[2]]
+    : FACES[fromFace].n.map((c) => (c === 0 ? 0 : -c));
+}
+
+// ステージ定義 → 矢印データ。不正なデータは例外にする。矢印の書き方は3通り:
+//   [x, y, z, 面, 方向]                          … 1セルの矢印
+//   { face, path: [[x,y,z], ...] }               … 1つの面の上の折れ線
+//   { path: [[x,y,z,面], ...] }                  … 面をまたぐ折れ線（またぐ所は同じセルで面だけ変える）
+function buildArrows(stage) {
+  const { size, arrows } = stage;
+  return arrows.map((e, i) => {
+    const bad = (m) => new Error(`arrow ${i}: ${m}`);
+    const tuple = Array.isArray(e);
+    const items = tuple ? [[e[0], e[1], e[2], e[3]]] : e.path.map((c) => (c.length === 4 ? c : [...c, e.face]));
+    if (items.length === 0) throw bad('empty path');
+    const cells = [];
+    const faces = [];
+    const seen = new Set();
+    items.forEach((c, k) => {
+      const cell = c.slice(0, 3);
+      const face = c[3];
+      if (!FACES[face]) throw bad(`unknown face ${face}`);
+      if (cell.length !== 3 || !cell.every(Number.isInteger) || cell.some((v) => v < 0 || v >= size)) throw bad('coordinate out of range');
+      if (!isOnFace(size, cell[0], cell[1], cell[2], face)) throw bad(`cell is not on face ${face}`);
+      if (seen.has(c.join())) throw bad('duplicate cell');
+      seen.add(c.join());
+      if (k > 0) {
+        const pc = cells[k - 1];
+        const pf = faces[k - 1];
+        const ok = pf === face ? dirBetween(face, pc, cell) !== null
+          : same(pc, cell) && FACES[pf].n.every((v, j) => v * FACES[face].n[j] === 0);
+        if (!ok) throw bad('cells are not connected');
+      }
+      cells.push(cell);
+      faces.push(face);
+    });
+    const n = cells.length;
+    const dir = tuple ? e[4]
+      : n > 1 ? dirOfVector(faces[n - 1], stepVector(faces[n - 2], cells[n - 2], faces[n - 1], cells[n - 1])) : e.dir;
+    if (!DIRS.includes(dir)) throw bad(`unknown dir ${dir}`);
+    return createArrow(i, faces, cells, dir);
+  });
+}
+
+// ---- puzzle.js ----
+
+const keyOf = (x, y, z, face) => `${x},${y},${z},${face}`;
+
+// ゲームロジック（描画非依存）。
+// 矢印は面の上のセル列（面をまたいでもよい）。頭のいる面の上を、頭の向きにまっすぐ面の端まで進んだ先に、別の矢印のセルがあれば射出できない。
+// 射出できると、矢印は蛇のように頭から進んで面の外へ出ていく。頭のいる面と別の面の矢印は障害物にならない。
+class Puzzle {
+  constructor(size, arrows) {
+    this.size = size;
+    this.initial = arrows.map((a) => ({ ...a, faces: [...a.faces], cells: a.cells.map((c) => [...c]) })); // リスタート用に初期状態を保存
+    this.reset();
+  }
+
+  reset() {
+    this.arrows = this.initial.map((a) => ({ ...a, faces: [...a.faces], cells: a.cells.map((c) => [...c]), removed: false }));
+    this.byId = new Map(this.arrows.map((a) => [a.id, a]));
+    this.occ = new Map(); // セル(+面) → その矢印
+    for (const a of this.arrows) a.cells.forEach((c, i) => this.occ.set(keyOf(c[0], c[1], c[2], a.faces[i]), a));
+    this.alive = new Set(this.arrows.map((a) => a.id));
+  }
+
+  get remaining() { return this.alive.size; }
+  isCleared() { return this.alive.size === 0; }
+
+  // 頭の前方を面の端までたどり、最初にぶつかるセルと矢印を返す（なければ null）
+  trace(id) {
+    const a = this.byId.get(id);
+    const d = dirVector(a.face, a.dir);
+    const h = a.cells[a.cells.length - 1];
+    let x = h[0] + d[0], y = h[1] + d[1], z = h[2] + d[2];
+    const n = this.size;
+    while (x >= 0 && x < n && y >= 0 && y < n && z >= 0 && z < n) {
+      const o = this.occ.get(keyOf(x, y, z, a.face));
+      if (o) return { arrow: o, cell: [x, y, z] };
+      x += d[0]; y += d[1]; z += d[2];
+    }
+    return null;
+  }
+
+  findBlocker(id) {
+    const t = this.trace(id);
+    return t ? t.arrow : null;
+  }
+
+  canLaunch(id) {
+    const a = this.byId.get(id);
+    return !!a && !a.removed && this.trace(id) === null;
+  }
+
+  launch(id) {
+    const a = this.byId.get(id);
+    if (!a || a.removed) return { ok: false, reason: 'invalid' };
+    const t = this.trace(id);
+    if (t) return { ok: false, reason: 'blocked', blockerId: t.arrow.id, cell: t.cell };
+    a.removed = true;
+    a.cells.forEach((c, i) => this.occ.delete(keyOf(c[0], c[1], c[2], a.faces[i])));
+    this.alive.delete(id);
+    return { ok: true, cleared: this.isCleared() };
+  }
+
+  // 全消去できる射出順を返す（不可能なら null）。消去は障害物を減らすだけなので貪欲法で判定できる。
+  solve() {
+    const p = new Puzzle(this.size, this.initial);
+    const order = [];
+    let progress = true;
+    while (p.remaining > 0 && progress) {
+      progress = false;
+      for (const id of [...p.alive]) {
+        if (p.launch(id).ok) { order.push(id); progress = true; }
+      }
+    }
+    return p.remaining === 0 ? order : null;
+  }
+}
+
+// ---- stages.js ----
+
+// ステージ生成: 乱数の種(seed)から折れ線の矢印を敷き詰める。同じ seed なら必ず同じ配置になる。
+// 矢印は立方体の表面を歩く折れ線で、cross の確率で面の境界をまたぐ。
+// 「あとから置く矢印は、頭の前方に既存の矢印がない」ように置くので、置いた順の逆に射出すれば必ず全消去できる。
+// （あとから置いた矢印が、先に置いた矢印の前方を塞ぐため、射出順序を考える必要が出る）
+function rng(seed) {
+  let s = seed | 0;
+  return () => {
+    s = (s + 0x6D2B79F5) | 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+const FACE_KEYS = Object.keys(FACES);
+const negate = (v) => v.map((c) => (c === 0 ? 0 : -c));
+const eq = (a, b) => a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
+const faceByNormal = (v) => FACE_KEYS.find((f) => eq(FACES[f].n, v));
+
+function generate(size, seed, { minLen, maxLen, maxArrows, cross = 0, maxFails = 400 }) {
+  const rand = rng(seed);
+  const occ = new Set();
+  const key = (c, f) => `${c.join()}:${f}`;
+  const inR = (c) => c.every((v) => v >= 0 && v < size);
+  // 1歩の移動ベクトル（面をまたぐ歩は、前の面の法線と逆向き）
+  const stepVec = (a, b) => (a.face === b.face ? b.cell.map((v, i) => v - a.cell[i]) : negate(FACES[a.face].n));
+  const arrows = [];
+  let fails = 0;
+  let turn = 0;
+  while (arrows.length < maxArrows && fails < maxFails) {
+    const face = FACE_KEYS[turn++ % FACE_KEYS.length]; // 6面を順番に使う
+    const len = minLen + Math.floor(rand() * (maxLen - minLen + 1));
+    const start = FACES[face].n.map((c) => (c !== 0 ? (c > 0 ? size - 1 : 0) : Math.floor(rand() * size)));
+    if (occ.has(key(start, face))) { fails++; continue; }
+    let cur = { cell: start, face };
+    const path = [cur];
+    const own = new Set([key(start, face)]);
+    let hv = dirVector(face, DIRS[Math.floor(rand() * 4)]);
+    while (path.length < len) {
+      if (rand() > 0.62) hv = dirVector(cur.face, DIRS[Math.floor(rand() * 4)]); // たまに曲がる
+      const base = Math.max(0, DIRS.findIndex((d) => eq(dirVector(cur.face, d), hv)));
+      let moved = false;
+      for (let t = 0; t < 4 && !moved; t++) {
+        const w = dirVector(cur.face, DIRS[(base + t) % 4]);
+        const nc = cur.cell.map((v, i) => v + w[i]);
+        let nxt;
+        let nhv;
+        if (inR(nc)) {
+          nxt = { cell: nc, face: cur.face };
+          nhv = w;
+        } else { // 面の端: cross の確率で、隣の面へ折れ曲がってまたぐ
+          if (rand() >= cross) continue;
+          nxt = { cell: [...cur.cell], face: faceByNormal(w) };
+          nhv = negate(FACES[cur.face].n);
+        }
+        if (occ.has(key(nxt.cell, nxt.face)) || own.has(key(nxt.cell, nxt.face))) continue;
+        path.push(nxt);
+        own.add(key(nxt.cell, nxt.face));
+        cur = nxt;
+        hv = nhv;
+        moved = true;
+      }
+      if (!moved) break;
+    }
+    if (path.length < minLen) { fails++; continue; }
+    const rev = [...path].reverse();
+    const heads = rand() < 0.5 ? [path, rev] : [rev, path]; // どちらの端を頭にするか
+    const ok = heads.find((p) => {
+      const h = p[p.length - 1];
+      const v = stepVec(p[p.length - 2], h);
+      for (let c = h.cell.map((x, i) => x + v[i]); inR(c); c = c.map((x, i) => x + v[i])) {
+        if (occ.has(key(c, h.face)) || own.has(key(c, h.face))) return false;
+      }
+      return true;
+    });
+    if (!ok) { fails++; continue; }
+    ok.forEach((it) => occ.add(key(it.cell, it.face)));
+    arrows.push({ path: ok.map((it) => [...it.cell, it.face]) });
+    fails = 0;
+  }
+  return arrows;
+}
+
+// レベル 1〜30。5レベルごとに立方体が1段大きくなり（3→8）、各段の中で矢印が増えていく。
+// 矢印は長くなり、面をまたぐ矢印も増える。
+const LEVEL_COUNT = 30;
+
+function levelParams(n) {
+  const t = Math.floor((n - 1) / 5); // 段（0〜5）
+  const j = (n - 1) % 5;             // 段の中の順番（0〜4）
+  const size = 3 + t;
+  const minLen = 2 + Math.floor(t * 0.9);
+  const maxLen = minLen + 1 + t + (j >= 2 ? 1 : 0);
+  const fill = 0.3 + 0.12 * j; // 表面のうち矢印で埋める割合の目安
+  const maxArrows = n === 1 ? 8 : Math.max(5, Math.round((6 * size * size * fill) / ((minLen + maxLen) / 2)));
+  const cross = n === 1 ? 0 : Math.min(0.5, 0.12 + 0.05 * t + 0.03 * j); // 面をまたぐ確率
+  return { size, minLen, maxLen, maxArrows, cross };
+}
+
+// 各レベルの乱数の種（tools/pick-seeds.mjs で、クリア可能で、射出順序が必要になる配置を選んだもの）
+const SEEDS = [1, 301, 134, 146, 172, 395, 131, 293, 338, 11, 326, 346, 232, 380, 83, 164, 61, 153, 20, 398, 41, 288, 60, 6, 42, 177, 194, 19, 208, 39];
+
+const STAGES = SEEDS.map((seed, i) => {
+  const L = levelParams(i + 1);
+  return { id: `lv${i + 1}`, name: `Lv${i + 1}`, size: L.size, arrows: generate(L.size, seed, L) };
+});
+
+// レベル n（1〜30）の問題を、指定した種で作る。条件を満たし、かつ全消去できることを確認できたときだけ返す（だめなら null）。
+// 条件: 目標の矢印数の85%以上・5面以上を使う・最初から射出できない矢印がある・面をまたぐ矢印がある（cross>0 のとき）。
+function validStage(n, seed) {
+  const L = levelParams(n);
+  const arrows = generate(L.size, seed, L);
+  if (arrows.length < L.maxArrows * 0.85) return null;
+  const p = new Puzzle(L.size, buildArrows({ size: L.size, arrows }));
+  if (new Set(p.arrows.map((a) => a.face)).size < 5) return null;
+  const blocked = p.arrows.filter((a) => !p.canLaunch(a.id)).length;
+  const cross = p.arrows.filter((a) => new Set(a.faces).size > 1).length;
+  if (blocked < 1 || (L.cross > 0 && cross < 1) || (L.cross === 0 && cross > 0)) return null;
+  if (!p.solve()) return null; // クリア可能であることを内部で確認
+  return { id: `lv${n}`, name: `Lv${n}`, size: L.size, arrows };
+}
+
+// 「新しい問題」: 種をランダムに選び、確認に通った問題だけを返す
+function newStage(n, random = Math.random) {
+  for (let t = 0; t < 300; t++) {
+    const st = validStage(n, 1 + Math.floor(random() * 2147483646));
+    if (st) return st;
+  }
+  return null;
+}
+
+// ---- save.js ----
+const KEY = 'cubePuzzle.save.v3';
+
+// セーブデータ: クリア済みステージ番号と、最後に遊んだステージ。保存先が使えなくても動作を止めない。
+function loadProgress(storage = globalThis.localStorage) {
+  try {
+    const d = JSON.parse(storage.getItem(KEY) || '{}');
+    return {
+      cleared: Array.isArray(d.cleared) ? d.cleared.filter(Number.isInteger) : [],
+      last: Number.isInteger(d.last) ? d.last : 0,
+    };
+  } catch (e) {
+    return { cleared: [], last: 0 };
+  }
+}
+
+function saveProgress(progress, storage = globalThis.localStorage) {
+  try {
+    storage.setItem(KEY, JSON.stringify(progress));
+  } catch (e) { /* 保存できない環境では何もしない */ }
+}
+
+// ---- camera.js ----
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+
+// 自作の簡易オービットカメラ（原点を注視）
+class CameraController {
+  constructor(camera) {
+    this.camera = camera;
+    this.yaw = Math.PI / 4;
+    this.pitch = 0.5;
+    this.zoom = 1;
+    this.baseDist = 10;
+    this.minPitch = -1.4;
+    this.maxPitch = 1.4;
+    this.minZoom = 0.6;
+    this.maxZoom = 2.5;
+  }
+
+  // 立方体全体が画面に収まる距離を計算（縦長・横長どちらにも対応）
+  fit(size, aspect) {
+    const radius = size * 0.5 * Math.sqrt(3) * 1.08;
+    const vfov = (this.camera.fov * Math.PI) / 180;
+    const hfov = 2 * Math.atan(Math.tan(vfov / 2) * aspect);
+    this.baseDist = radius / Math.sin(Math.min(vfov, hfov) / 2);
+    this.update();
+  }
+
+  rotate(dx, dy) {
+    this.yaw -= dx * 0.008;
+    this.pitch = clamp(this.pitch + dy * 0.008, this.minPitch, this.maxPitch);
+    this.update();
+  }
+
+  zoomBy(factor) {
+    this.zoom = clamp(this.zoom * factor, this.minZoom, this.maxZoom);
+    this.update();
+  }
+
+  update() {
+    const d = this.baseDist / this.zoom;
+    const cp = Math.cos(this.pitch);
+    this.camera.position.set(
+      d * cp * Math.sin(this.yaw),
+      d * Math.sin(this.pitch),
+      d * cp * Math.cos(this.yaw),
+    );
+    this.camera.lookAt(0, 0, 0);
+  }
+}
+
+// ---- input.js ----
+const TAP_THRESHOLD = 8; // px。これ未満の移動はタップ扱い
+
+// タッチ/マウス共通（Pointer Events）。1本指ドラッグ=回転、2本指ピンチ=ズーム、移動が小さければタップ。
+class InputController {
+  constructor(el, { onRotate, onZoom, onTap }) {
+    this.el = el;
+    this.onRotate = onRotate;
+    this.onZoom = onZoom;
+    this.onTap = onTap;
+    this.pointers = new Map();
+    this.moved = 0;
+    this.multi = false;
+    this.lastPinch = 0;
+
+    el.addEventListener('pointerdown', (e) => this.down(e));
+    el.addEventListener('pointermove', (e) => this.move(e));
+    el.addEventListener('pointerup', (e) => this.up(e));
+    el.addEventListener('pointercancel', (e) => this.cancel(e));
+    el.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      this.onZoom(Math.exp(-e.deltaY * 0.001));
+    }, { passive: false });
+    // iOS Safari のページ全体ピンチを抑止
+    for (const t of ['gesturestart', 'gesturechange', 'gestureend']) {
+      document.addEventListener(t, (e) => e.preventDefault());
+    }
+  }
+
+  pinchDistance() {
+    const [a, b] = [...this.pointers.values()];
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  }
+
+  down(e) {
+    this.el.setPointerCapture(e.pointerId);
+    this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (this.pointers.size === 1) {
+      this.moved = 0;
+      this.multi = false;
+    } else if (this.pointers.size === 2) {
+      this.multi = true;
+      this.lastPinch = this.pinchDistance();
+    }
+  }
+
+  move(e) {
+    const p = this.pointers.get(e.pointerId);
+    if (!p) return;
+    const dx = e.clientX - p.x;
+    const dy = e.clientY - p.y;
+    p.x = e.clientX;
+    p.y = e.clientY;
+
+    if (this.pointers.size === 1) {
+      this.moved += Math.hypot(dx, dy);
+      if (this.moved >= TAP_THRESHOLD) this.onRotate(dx, dy);
+    } else if (this.pointers.size === 2) {
+      const d = this.pinchDistance();
+      if (this.lastPinch > 0) this.onZoom(d / this.lastPinch);
+      this.lastPinch = d;
+    }
+  }
+
+  up(e) {
+    const wasSingle = this.pointers.size === 1 && !this.multi;
+    const p = this.pointers.get(e.pointerId);
+    this.pointers.delete(e.pointerId);
+    if (wasSingle && p && this.moved < TAP_THRESHOLD) {
+      this.onTap(e.clientX, e.clientY);
+    }
+  }
+
+  cancel(e) {
+    this.pointers.delete(e.pointerId);
+  }
+}
+
+// ---- renderer.js ----
+
+const STROKE = 0.16; // 矢印の線の太さ（セル=1）
+const GLOW = 0.44;   // 発光（強調表示）の太さ
+const LIFT = 0.012;  // 面から浮かせる量（重なりのちらつき防止。小さいほど貼り付いて見える）
+const COLORS = { ink: 0x1d2636, blue: 0x2f6df6, red: 0xe5382b, amber: 0xff9f1a };
+const FACE_COLORS = [0xe9eef4, 0xe3e9f0, 0xf1f4f8, 0xdde4ec, 0xeaf0f6, 0xe6ecf3];
+const ckey = (x, y, z, f) => `${x},${y},${z},${f}`;
+
+// 折れ線（3D点列 points と、各区間の面の法線 nrm）を平たいリボンにして、先端に矢じりを付ける。d は頭の向き。
+function ribbon(points, nrm, d, width, headHalf, tipLen) {
+  const pos = [];
+  const tri = (a, b, c) => pos.push(a.x, a.y, a.z, b.x, b.y, b.z, c.x, c.y, c.z);
+  const hw = width / 2;
+  for (let i = 0; i < points.length - 1; i++) {
+    const p = points[i];
+    const q = points[i + 1];
+    const v = q.clone().sub(p);
+    if (v.lengthSq() < 1e-10) continue;
+    const dir = v.normalize();
+    const side = nrm[i].clone().cross(dir).multiplyScalar(hw);
+    // 同じ面の折れ角では、角が欠けないよう端を線幅の半分だけ延長する。面をまたぐ継ぎ目は延長しない
+    const extA = i === 0 || nrm[i - 1].distanceToSquared(nrm[i]) < 1e-6;
+    const extB = i === points.length - 2 || nrm[i + 1].distanceToSquared(nrm[i]) < 1e-6;
+    const a = p.clone().addScaledVector(dir, extA ? -hw : 0);
+    const b = q.clone().addScaledVector(dir, extB ? hw : 0);
+    const a1 = a.clone().add(side);
+    const a2 = a.clone().sub(side);
+    const b1 = b.clone().add(side);
+    const b2 = b.clone().sub(side);
+    tri(a1, b1, b2);
+    tri(a1, b2, a2);
+  }
+  const e = points[points.length - 1];
+  const side = nrm[nrm.length - 1].clone().cross(d).multiplyScalar(headHalf);
+  tri(e.clone().add(side), e.clone().addScaledVector(d, tipLen), e.clone().sub(side));
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  return g;
+}
+
+// 折れ線の弧長 from〜to の部分を切り出す（区間ごとの法線も一緒に返す）
+function slice(points, nrm, from, to) {
+  const out = { pts: [], nrm: [] };
+  let acc = 0;
+  for (let i = 0; i < points.length - 1; i++) {
+    const p = points[i];
+    const q = points[i + 1];
+    const len = p.distanceTo(q);
+    const s0 = acc;
+    const s1 = acc + len;
+    acc = s1;
+    if (len < 1e-9 || s1 <= from) continue;
+    if (s0 >= to) break;
+    const ta = (Math.max(from, s0) - s0) / len;
+    const tb = (Math.min(to, s1) - s0) / len;
+    if (!out.pts.length) out.pts.push(p.clone().lerp(q, ta));
+    out.pts.push(p.clone().lerp(q, tb));
+    out.nrm.push(nrm[i]);
+  }
+  return out;
+}
+
+class Renderer {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.gl = new THREE.WebGLRenderer({ canvas, antialias: true });
+    this.gl.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+    this.gl.setClearColor(new THREE.Color(bg || '#dfe6ee'));
+
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(40, 1, 0.5, 120);
+    this.scene.add(new THREE.AmbientLight(0xffffff, 1.1));
+    const sun = new THREE.DirectionalLight(0xffffff, 0.9);
+    sun.position.set(3, 6, 4);
+    this.scene.add(sun);
+
+    this.group = new THREE.Group();
+    this.scene.add(this.group);
+    this.mats = {};
+    for (const [k, c] of Object.entries(COLORS)) {
+      this.mats[k] = new THREE.MeshBasicMaterial({
+        color: c, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2,
+      });
+    }
+    this.raycaster = new THREE.Raycaster();
+    this.recs = new Map();  // arrow.id → 描画用データ（内部データとは別管理）
+    this.cells = new Map(); // セル(+面) → arrow.id（タップ判定用。射出済みは消える）
+    this.fx = [];
+    this.size = 3;
+  }
+
+  // 立方体と矢印を作り直す
+  build(size, arrows) {
+    this.size = size;
+    this.group.clear();
+    this.recs.clear();
+    this.cells.clear();
+    this.fx = [];
+    this.group.rotation.y = 0;
+    this.group.scale.setScalar(1);
+
+    const faceMats = FACE_COLORS.map((c) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.9 }));
+    const body = new THREE.Mesh(new THREE.BoxGeometry(size, size, size), faceMats);
+    this.group.add(body);
+    this.group.add(new THREE.LineSegments(
+      new THREE.EdgesGeometry(body.geometry),
+      new THREE.LineBasicMaterial({ color: 0x1d2636 }),
+    ));
+
+    const off = (size - 1) / 2;
+    const lift = 0.5 + LIFT;
+    const nOf = (f) => new THREE.Vector3(...FACES[f].n);
+    const ctr = (c) => new THREE.Vector3(c[0] - off, c[1] - off, c[2] - off);
+    for (const a of arrows) {
+      const n = nOf(a.face); // 頭のいる面の法線
+      const d = new THREE.Vector3(...dirVector(a.face, a.dir));
+      const pts = [ctr(a.cells[0]).addScaledVector(nOf(a.faces[0]), lift)];
+      const nrm = [];
+      for (let i = 1; i < a.cells.length; i++) {
+        const na = nOf(a.faces[i - 1]);
+        const nb = nOf(a.faces[i]);
+        const c = ctr(a.cells[i]);
+        if (a.faces[i] !== a.faces[i - 1]) {
+          // 面をまたぐ: 前の面を辺（面の端）までたどり、ごく短い斜めの帯で辺をまたいで、次の面を続ける
+          pts.push(c.clone().addScaledVector(na, lift).addScaledVector(nb, 0.5));
+          nrm.push(na);
+          pts.push(c.clone().addScaledVector(na, 0.5).addScaledVector(nb, lift));
+          nrm.push(na.clone().add(nb).normalize());
+        }
+        pts.push(c.clone().addScaledVector(nb, lift));
+        nrm.push(nb);
+      }
+      if (pts.length === 1) { // 1セルの矢印は短い軸を付ける
+        pts.unshift(pts[0].clone().addScaledVector(d, -0.35));
+        nrm.push(n);
+      }
+      let len = 0;
+      for (let i = 0; i < pts.length - 1; i++) len += pts[i].distanceTo(pts[i + 1]);
+      const E = size + 2; // 射出時に頭が進む距離（面の外まで出きる長さ）
+      const full = [...pts, pts[pts.length - 1].clone().addScaledVector(d, E)];
+      const fullN = [...nrm, n];
+      const mesh = new THREE.Mesh(ribbon(pts, nrm, d, STROKE, 0.27, 0.5), this.mats.ink);
+      this.group.add(mesh);
+      this.recs.set(a.id, { id: a.id, face: a.face, n, d, pts, nrm, full, fullN, len, E, mesh, glow: null, cells: a.cells, faces: a.faces });
+      a.cells.forEach((c, i) => this.cells.set(ckey(c[0], c[1], c[2], a.faces[i]), a.id));
+    }
+  }
+
+  // 画面座標 → 矢印ID（なければ null）。タップ位置を立方体の面に当て、近くのセルにある矢印を選ぶ。
+  pick(clientX, clientY) {
+    const r = this.canvas.getBoundingClientRect();
+    const ndc = new THREE.Vector2(((clientX - r.left) / r.width) * 2 - 1, -((clientY - r.top) / r.height) * 2 + 1);
+    this.raycaster.setFromCamera(ndc, this.camera);
+    this.group.updateMatrixWorld(true);
+    const inv = new THREE.Matrix4().copy(this.group.matrixWorld).invert();
+    const ray = this.raycaster.ray.clone().applyMatrix4(inv);
+    const n = this.size;
+    const h = n / 2;
+    const hit = ray.intersectBox(new THREE.Box3(new THREE.Vector3(-h, -h, -h), new THREE.Vector3(h, h, h)), new THREE.Vector3());
+    if (!hit) return null;
+    const hv = [hit.x, hit.y, hit.z];
+    let axis = 0;
+    let best = Infinity;
+    for (let i = 0; i < 3; i++) {
+      const dd = Math.abs(Math.abs(hv[i]) - h);
+      if (dd < best) { best = dd; axis = i; }
+    }
+    const face = (hv[axis] > 0 ? '+' : '-') + 'xyz'[axis];
+    const free = [0, 1, 2].filter((i) => i !== axis);
+    const off = (n - 1) / 2;
+    const base = hv.map((c) => Math.min(n - 1, Math.max(0, Math.floor(c + h))));
+    let bestId = null;
+    let bestD = 0.75; // 線が細いので、近くのセルまで許容する
+    for (let da = -1; da <= 1; da++) {
+      for (let db = -1; db <= 1; db++) {
+        const c = [0, 0, 0];
+        c[axis] = hv[axis] > 0 ? n - 1 : 0;
+        c[free[0]] = base[free[0]] + da;
+        c[free[1]] = base[free[1]] + db;
+        if (c.some((v) => v < 0 || v >= n)) continue;
+        const id = this.cells.get(ckey(c[0], c[1], c[2], face));
+        if (id === undefined) continue;
+        const dist = Math.hypot(hv[free[0]] - (c[free[0]] - off), hv[free[1]] - (c[free[1]] - off));
+        if (dist < bestD) { bestD = dist; bestId = id; }
+      }
+    }
+    return bestId;
+  }
+
+  makeGlow(r, color, opacity) {
+    const m = new THREE.Mesh(
+      ribbon(r.pts, r.nrm, r.d, GLOW, 0.4, 0.5),
+      new THREE.MeshBasicMaterial({
+        color: COLORS[color], transparent: true, opacity, depthWrite: false, side: THREE.DoubleSide,
+        polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1,
+      }),
+    );
+    this.group.add(m);
+    return m;
+  }
+
+  dropGlow(r) {
+    if (!r.glow) return;
+    this.group.remove(r.glow);
+    r.glow.geometry.dispose();
+    r.glow.material.dispose();
+    r.glow = null;
+  }
+
+  // 指定した矢印に関わる進行中の演出を打ち切る（見た目を元に戻す）
+  cancelFx(ids) {
+    this.fx = this.fx.filter((f) => {
+      if (f.touches && f.touches.some((i) => ids.includes(i))) { f.finish(); return false; }
+      return true;
+    });
+  }
+
+  // 射出: 青く発光し、蛇のように頭から素早く進んで面の外へ出ていく
+  launch(id) {
+    const r = this.recs.get(id);
+    this.cancelFx([id]);
+    r.cells.forEach((c, i) => this.cells.delete(ckey(c[0], c[1], c[2], r.faces[i])));
+    r.mesh.material = this.mats.blue;
+    r.glow = this.makeGlow(r, 'blue', 0.4);
+    const setGeo = (mesh, seg, w, hh, tip) => {
+      mesh.geometry.dispose();
+      mesh.visible = seg.pts.length >= 2;
+      if (mesh.visible) mesh.geometry = ribbon(seg.pts, seg.nrm, r.d, w, hh, tip);
+    };
+    this.fx.push({
+      type: 'launch', touches: [id], t0: performance.now(), dur: 120 + r.E * 22,
+      tick: (p) => {
+        const s = r.E * (0.35 * p + 0.65 * p * p); // 最初から動き出し、だんだん加速する
+        const seg = slice(r.full, r.fullN, s, s + r.len);
+        setGeo(r.mesh, seg, STROKE, 0.27, 0.5);
+        setGeo(r.glow, seg, GLOW, 0.4, 0.5);
+        r.glow.material.opacity = 0.4 * (1 - 0.5 * p);
+      },
+      finish: () => {
+        this.group.remove(r.mesh);
+        r.mesh.geometry.dispose();
+        this.dropGlow(r);
+      },
+    });
+  }
+
+  // 射出不可: ぶつかる所まで蛇のように進み、衝突の火花と赤い発光のあと、元の位置へ戻る。
+  // ぶつかった相手の矢印も橙に光る。
+  flashBlocked(id, blockerId, cell) {
+    const r = this.recs.get(id);
+    const b = blockerId !== undefined && blockerId !== id ? this.recs.get(blockerId) : null;
+    this.cancelFx([id, blockerId]);
+    r.mesh.material = this.mats.red;
+    r.glow = this.makeGlow(r, 'red', 0.55);
+    if (b) {
+      b.mesh.material = this.mats.amber;
+      b.glow = this.makeGlow(b, 'amber', 0.55);
+    }
+
+    // 進む距離: 頭の矢じりの先が、ぶつかる矢印の線に触れるところまで
+    const head = r.cells[r.cells.length - 1];
+    const k = cell ? Math.abs(cell[0] - head[0]) + Math.abs(cell[1] - head[1]) + Math.abs(cell[2] - head[2]) : 1;
+    const travel = Math.max(0.15, k - 0.6);
+    const fwd = 90 + 24 * travel;   // 突進（加速しながら）
+    const hold = 40;                // ぶつかった瞬間の間
+    const back = 160 + 30 * travel; // 元の位置へ戻る
+    const tImpact = fwd;
+    const tBack = fwd + hold;
+    const tEnd = tBack + back;
+    const dur = Math.max(800, tEnd + 300);
+
+    // 火花: ぶつかった位置から面に沿って放射状に飛ばす（衝突の瞬間に始まる）
+    const N = 20;
+    const off = (this.size - 1) / 2;
+    const origin = cell
+      ? new THREE.Vector3(cell[0] - off, cell[1] - off, cell[2] - off).addScaledVector(r.n, 0.5 + LIFT + 0.05)
+      : r.pts[r.pts.length - 1].clone();
+    const U = new THREE.Vector3(...FACES[r.face].u);
+    const V = new THREE.Vector3(...FACES[r.face].v);
+    const vel = [];
+    for (let i = 0; i < N; i++) {
+      const ang = (i / N) * Math.PI * 2 + Math.random() * 0.3;
+      const sp = 0.9 + Math.random() * 1.3;
+      vel.push(new THREE.Vector3()
+        .addScaledVector(U, Math.cos(ang) * sp)
+        .addScaledVector(V, Math.sin(ang) * sp)
+        .addScaledVector(r.n, 0.8));
+    }
+    const buf = new Float32Array(N * 3);
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(buf, 3));
+    const pm = new THREE.PointsMaterial({
+      color: 0xff5a2c, size: 5 * this.gl.getPixelRatio(), sizeAttenuation: false, transparent: true, depthWrite: false, opacity: 0,
+    });
+    const sparks = new THREE.Points(geo, pm);
+    sparks.frustumCulled = false;
+    this.group.add(sparks);
+
+    const setGeo = (mesh, seg, w, hh, tip) => {
+      mesh.geometry.dispose();
+      mesh.visible = seg.pts.length >= 2;
+      if (mesh.visible) mesh.geometry = ribbon(seg.pts, seg.nrm, r.d, w, hh, tip);
+    };
+    const side = r.n.clone().cross(r.d);
+    let lastS = 0;
+    this.fx.push({
+      type: 'blocked', touches: [id, blockerId], t0: performance.now(), dur,
+      tick: (p) => {
+        const t = p * dur;
+        let sl; // 頭が進んだ距離
+        if (t < tImpact) { const q = t / fwd; sl = travel * q * q; }
+        else if (t < tBack) sl = travel;
+        else if (t < tEnd) { const q = (t - tBack) / back; sl = travel * (1 - q) * (1 - q); }
+        else sl = 0;
+        if (sl !== lastS) {
+          lastS = sl;
+          const seg = slice(r.full, r.fullN, sl, sl + r.len);
+          setGeo(r.mesh, seg, STROKE, 0.27, 0.5);
+          setGeo(r.glow, seg, GLOW, 0.4, 0.5);
+        }
+        const qi = t < tImpact ? 0 : Math.min(1, (t - tImpact) / (dur - tImpact)); // 衝突からの経過
+        const lat = 0.06 * (1 - qi) * Math.sin(qi * Math.PI * 10); // 衝突の余韻の横揺れ
+        r.mesh.position.copy(side).multiplyScalar(lat);
+        r.glow.position.copy(r.mesh.position);
+        const pulse = 0.5 + 0.5 * Math.abs(Math.sin(qi * Math.PI * 4));
+        r.glow.material.opacity = t < tImpact ? 0.55 : 0.65 * (1 - qi) * pulse;
+        if (b && b.glow) b.glow.material.opacity = t < tImpact ? 0.55 : 0.6 * (1 - qi) * (0.5 + 0.5 * Math.abs(Math.sin(qi * Math.PI * 3)));
+        for (let i = 0; i < N; i++) {
+          buf[i * 3] = origin.x + vel[i].x * qi * 0.7;
+          buf[i * 3 + 1] = origin.y + vel[i].y * qi * 0.7;
+          buf[i * 3 + 2] = origin.z + vel[i].z * qi * 0.7;
+        }
+        geo.attributes.position.needsUpdate = true;
+        pm.opacity = t < tImpact ? 0 : 1 - qi;
+      },
+      finish: () => {
+        r.mesh.geometry.dispose();
+        r.mesh.geometry = ribbon(r.pts, r.nrm, r.d, STROKE, 0.27, 0.5); // 元の形に戻す
+        r.mesh.visible = true;
+        r.mesh.material = this.mats.ink;
+        r.mesh.position.set(0, 0, 0);
+        this.dropGlow(r);
+        if (b) {
+          if (b.mesh.material === this.mats.amber) b.mesh.material = this.mats.ink;
+          this.dropGlow(b);
+        }
+        this.group.remove(sparks);
+        geo.dispose();
+        pm.dispose();
+      },
+    });
+  }
+
+  // クリア演出: 立方体が一回転しながら少し膨らむ
+  celebrate() {
+    this.fx.push({
+      type: 'cheer', t0: performance.now(), dur: 900,
+      tick: (p) => {
+        const e = 1 - Math.pow(1 - p, 3);
+        this.group.rotation.y = Math.PI * 2 * e;
+        this.group.scale.setScalar(1 + 0.12 * Math.sin(p * Math.PI));
+      },
+      finish: () => { this.group.rotation.y = 0; this.group.scale.setScalar(1); },
+    });
+  }
+
+  update(now) {
+    this.fx = this.fx.filter((f) => {
+      const p = Math.min(1, Math.max(0, (now - f.t0) / f.dur));
+      f.tick(p);
+      if (p >= 1) { f.finish(); return false; }
+      return true;
+    });
+  }
+
+  resize() {
+    const w = this.canvas.clientWidth;
+    const h = this.canvas.clientHeight;
+    this.gl.setSize(w, h, false);
+    this.camera.aspect = w / h;
+    this.camera.updateProjectionMatrix();
+    return w / h;
+  }
+
+  render() {
+    this.gl.render(this.scene, this.camera);
+  }
+}
+
+// ---- ui.js ----
+// 画面UI（DOM操作のみ）
+class UI {
+  constructor({ count, onStage, onNext, onReset, perPage = 10 }) {
+    this.total = count;
+    this.per = perPage;
+    this.pages = Math.ceil(count / perPage);
+    this.page = 0;
+    this.current = 0;
+    this.cleared = [];
+    this.countEl = document.getElementById('count');
+    this.lvEl = document.getElementById('lv');
+    this.clearEl = document.getElementById('clear');
+    this.clearText = document.getElementById('clear-text');
+    this.nextBtn = document.getElementById('next');
+    this.pagePrev = document.getElementById('pagePrev');
+    this.pageNext = document.getElementById('pageNext');
+
+    // 画面下部のレベルボタン（1ページ perPage 個）
+    const box = document.getElementById('levels');
+    this.btns = [];
+    for (let k = 0; k < perPage; k++) {
+      const b = document.createElement('button');
+      b.addEventListener('click', () => onStage(Number(b.dataset.i)));
+      box.appendChild(b);
+      this.btns.push(b);
+    }
+    this.pagePrev.addEventListener('click', () => { this.page = Math.max(0, this.page - 1); this.render(); });
+    this.pageNext.addEventListener('click', () => { this.page = Math.min(this.pages - 1, this.page + 1); this.render(); });
+    this.nextBtn.addEventListener('click', onNext);
+    document.getElementById('reset').addEventListener('click', onReset);
+  }
+
+  render() {
+    this.btns.forEach((b, k) => {
+      const i = this.page * this.per + k;
+      b.hidden = i >= this.total;
+      b.dataset.i = String(i);
+      b.textContent = String(i + 1) + (this.cleared.includes(i) ? ' ✓' : '');
+      b.classList.toggle('on', i === this.current);
+    });
+    this.pagePrev.disabled = this.page === 0;
+    this.pageNext.disabled = this.page >= this.pages - 1;
+  }
+
+  setCount(n) { this.countEl.textContent = String(n); }
+
+  setStage(i) {
+    this.current = i;
+    this.page = Math.floor(i / this.per); // 開いたレベルのあるページを表示する
+    this.lvEl.textContent = `Lv${i + 1}`;
+    this.render();
+  }
+
+  // クリア済みレベルには ✓ を付ける
+  setCleared(list) {
+    this.cleared = list;
+    this.render();
+  }
+
+  showClear(hasNext, level) {
+    this.clearText.textContent = `Lv${level} クリア！`;
+    this.nextBtn.hidden = !hasNext;
+    this.clearEl.hidden = false;
+  }
+
+  hideClear() { this.clearEl.hidden = true; }
+}
+
+// ---- game.js ----
+
+// ゲーム全体の管理: ロジック(Puzzle)・描画(Renderer)・UI・セーブをつなぐ
+class Game {
+  constructor({ renderer, cam, ui }) {
+    this.renderer = renderer;
+    this.cam = cam;
+    this.ui = ui;
+    this.stageIndex = 0;
+    this.puzzle = null;
+    this.progress = loadProgress();
+  }
+
+  start() {
+    const last = this.progress.last;
+    this.loadStage(last >= 0 && last < STAGES.length ? last : 0);
+  }
+
+  // 固定のレベルを開く。同じ番号を指定すると、初期状態からやり直しになる
+  loadStage(i) {
+    this.load(i, STAGES[i]);
+  }
+
+  // 「新しい問題」: 今のレベルと同じ難易度で、クリア可能と確認できた新しい配置に差し替える
+  regenerate() {
+    const st = newStage(this.stageIndex + 1);
+    if (st) this.load(this.stageIndex, st);
+  }
+
+  load(i, stage) {
+    this.stageIndex = i;
+    this.puzzle = new Puzzle(stage.size, buildArrows(stage));
+    this.renderer.build(stage.size, this.puzzle.arrows);
+    this.cam.fit(stage.size, this.renderer.camera.aspect);
+    this.ui.setStage(i);
+    this.syncUI();
+    this.progress.last = i;
+    saveProgress(this.progress);
+  }
+
+  restart() {
+    this.puzzle.reset();
+    this.renderer.build(this.puzzle.size, this.puzzle.arrows);
+    this.syncUI();
+  }
+
+  next() {
+    if (this.stageIndex + 1 < STAGES.length) this.loadStage(this.stageIndex + 1);
+  }
+
+  syncUI() {
+    this.ui.setCount(this.puzzle.remaining);
+    this.ui.setCleared(this.progress.cleared);
+    this.ui.hideClear();
+  }
+
+  onCleared() {
+    if (!this.progress.cleared.includes(this.stageIndex)) this.progress.cleared.push(this.stageIndex);
+    saveProgress(this.progress);
+    this.ui.setCleared(this.progress.cleared);
+    setTimeout(() => {
+      if (!this.puzzle.isCleared()) return;
+      this.renderer.celebrate();
+      this.ui.showClear(this.stageIndex + 1 < STAGES.length, this.stageIndex + 1);
+    }, 350);
+  }
+
+  tap(x, y) {
+    if (this.puzzle.isCleared()) return;
+    const id = this.renderer.pick(x, y);
+    if (id === null) return;
+    const r = this.puzzle.launch(id);
+    if (r.ok) {
+      this.renderer.launch(id);
+      this.ui.setCount(this.puzzle.remaining);
+      if (r.cleared) this.onCleared();
+    } else if (r.reason === 'blocked') {
+      this.renderer.flashBlocked(id, r.blockerId, r.cell);
+      if (navigator.vibrate) navigator.vibrate([25, 30, 25]); // 対応端末のみ振動
+    }
+  }
+}
+
+// ---- main.js ----
+
+const canvas = document.getElementById('view');
+const renderer = new Renderer(canvas);
+const cam = new CameraController(renderer.camera);
+
+let game;
+const ui = new UI({
+  count: STAGES.length,
+  onStage: (i) => game.loadStage(i),
+  onNext: () => game.next(),
+  onReset: () => game.regenerate(),
+});
+game = new Game({ renderer, cam, ui });
+
+renderer.resize();
+game.start();
+
+window.addEventListener('resize', () => {
+  const aspect = renderer.resize();
+  cam.fit(game.puzzle.size, aspect);
+});
+
+new InputController(canvas, {
+  onRotate: (dx, dy) => cam.rotate(dx, dy),
+  onZoom: (f) => cam.zoomBy(f),
+  onTap: (x, y) => game.tap(x, y),
+});
+
+function loop(now) {
+  renderer.update(now);
+  renderer.render();
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+})();
+</script>
+</body>
+</html>
