@@ -380,7 +380,7 @@ function validStage(n, seed) {
   const cross = p.arrows.filter((a) => new Set(a.faces).size > 1).length;
   if (blocked < 1 || (L.cross > 0 && cross < 1) || (L.cross === 0 && cross > 0)) return null;
   if (!p.solve()) return null; // クリア可能であることを内部で確認
-  return { id: `lv${n}`, name: `Lv${n}`, size: L.size, arrows };
+  return { id: `lv${n}`, name: `Lv${n}`, size: L.size, seed, arrows };
 }
 
 // 「新しい問題」: 種をランダムに選び、確認に通った問題だけを返す
@@ -395,16 +395,32 @@ function newStage(n, random = Math.random) {
 // ---- save.js ----
 const KEY = 'cubePuzzle.save.v3';
 
-// セーブデータ: クリア済みステージ番号と、最後に遊んだステージ。保存先が使えなくても動作を止めない。
+// セーブデータ:
+//   cleared … クリア済みレベル番号（0始まり）
+//   last    … 最後に遊んだレベル
+//   levels  … レベルごとの途中経過 { [番号]: { seed, removed } }
+//             seed: 「新しい問題」で作った配置の種（固定の配置なら null）
+//             removed: 射出済みの矢印IDを、射出した順に並べたもの
+// 保存先が使えなくても動作を止めない。
 function loadProgress(storage = globalThis.localStorage) {
   try {
     const d = JSON.parse(storage.getItem(KEY) || '{}');
+    const levels = {};
+    if (d.levels && typeof d.levels === 'object') {
+      for (const [k, v] of Object.entries(d.levels)) {
+        const i = Number(k);
+        if (Number.isInteger(i) && i >= 0 && v && Array.isArray(v.removed)) {
+          levels[i] = { seed: Number.isInteger(v.seed) ? v.seed : null, removed: v.removed.filter(Number.isInteger) };
+        }
+      }
+    }
     return {
       cleared: Array.isArray(d.cleared) ? d.cleared.filter(Number.isInteger) : [],
       last: Number.isInteger(d.last) ? d.last : 0,
+      levels,
     };
   } catch (e) {
-    return { cleared: [], last: 0 };
+    return { cleared: [], last: 0, levels: {} };
   }
 }
 
@@ -1003,48 +1019,81 @@ class UI {
 
 // ---- game.js ----
 
-// ゲーム全体の管理: ロジック(Puzzle)・描画(Renderer)・UI・セーブをつなぐ
+// ゲーム全体の管理: ロジック(Puzzle)・描画(Renderer)・UI・セーブをつなぐ。
+// 途中経過はレベルごとに保存し、別のレベルを開いても、ページを開き直しても続きから遊べる。
+// クリアしたレベルは、矢印が一つもない状態（クリア済み）のまま残る（開き直したときに「クリア！」は出さない）。「新しい問題」を押したときだけ、
+// 途中経過とクリア済みの印を消して、新しい配置にする。
 class Game {
-  constructor({ renderer, cam, ui }) {
+  constructor({ renderer, cam, ui, storage }) {
     this.renderer = renderer;
     this.cam = cam;
     this.ui = ui;
+    this.storage = storage;
     this.stageIndex = 0;
     this.puzzle = null;
-    this.progress = loadProgress();
+    this.seed = null;     // 「新しい問題」で作った配置の種（固定の配置なら null）
+    this.launched = [];   // 今のレベルで射出済みの矢印ID（射出した順）
+    this.progress = loadProgress(storage);
   }
+
+  save() { saveProgress(this.progress, this.storage); }
 
   start() {
     const last = this.progress.last;
     this.loadStage(last >= 0 && last < STAGES.length ? last : 0);
   }
 
-  // 固定のレベルを開く。同じ番号を指定すると、初期状態からやり直しになる
+  // レベルを開く。保存された途中経過があれば、その続きから始める
   loadStage(i) {
-    this.load(i, STAGES[i]);
+    const e = this.progress.levels[i] || { seed: null, removed: [] };
+    let stage = STAGES[i];
+    let seed = null;
+    if (e.seed) {
+      const st = validStage(i + 1, e.seed); // 同じ種からは同じ配置が再現される
+      if (st) { stage = st; seed = e.seed; }
+    }
+    this.open(i, stage, seed, seed === e.seed ? e.removed : []);
   }
 
-  // 「新しい問題」: 今のレベルと同じ難易度で、クリア可能と確認できた新しい配置に差し替える
+
+  // 「新しい問題」: 同じ難易度で、全消去できると確認できた新しい配置にする。途中経過とクリア済みの印は消える
   regenerate() {
-    const st = newStage(this.stageIndex + 1);
-    if (st) this.load(this.stageIndex, st);
+    const i = this.stageIndex;
+    const st = newStage(i + 1);
+    if (!st) return;
+    this.progress.cleared = this.progress.cleared.filter((c) => c !== i);
+    this.progress.levels[i] = { seed: st.seed, removed: [] };
+    this.open(i, st, st.seed, []);
   }
 
-  load(i, stage) {
+  open(i, stage, seed, removed) {
     this.stageIndex = i;
+    this.opened = (this.opened || 0) + 1; // レベルを開くたびに増える（遅れて動く処理が、古い画面に影響しないようにする）
+    this.seed = seed;
     this.puzzle = new Puzzle(stage.size, buildArrows(stage));
-    this.renderer.build(stage.size, this.puzzle.arrows);
+    this.launched = [];
+    if (this.progress.cleared.includes(i)) {
+      // クリア済み: 全部射出した状態（矢印が一つもない）で開く
+      this.launched = this.puzzle.solve() || [];
+      this.launched.forEach((id) => this.puzzle.launch(id));
+    } else {
+      // 保存された途中経過を、射出した順に再現する（再現できなければ最初から）
+      let ok = true;
+      for (const id of removed) {
+        if (!this.puzzle.launch(id).ok) { ok = false; break; }
+        this.launched.push(id);
+      }
+      if (!ok) {
+        this.puzzle.reset();
+        this.launched = [];
+      }
+    }
+    this.renderer.build(stage.size, this.puzzle.arrows.filter((a) => !a.removed));
     this.cam.fit(stage.size, this.renderer.camera.aspect);
     this.ui.setStage(i);
     this.syncUI();
     this.progress.last = i;
-    saveProgress(this.progress);
-  }
-
-  restart() {
-    this.puzzle.reset();
-    this.renderer.build(this.puzzle.size, this.puzzle.arrows);
-    this.syncUI();
+    this.save();
   }
 
   next() {
@@ -1058,13 +1107,16 @@ class Game {
   }
 
   onCleared() {
-    if (!this.progress.cleared.includes(this.stageIndex)) this.progress.cleared.push(this.stageIndex);
-    saveProgress(this.progress);
+    const i = this.stageIndex;
+    if (!this.progress.cleared.includes(i)) this.progress.cleared.push(i);
+    this.progress.levels[i] = { seed: this.seed, removed: [...this.launched] };
+    this.save();
     this.ui.setCleared(this.progress.cleared);
+    const opened = this.opened;
     setTimeout(() => {
-      if (!this.puzzle.isCleared()) return;
+      if (this.opened !== opened) return; // 別のレベルへ移っていたら何もしない（「クリア！」はクリア直後の画面にだけ出す）
       this.renderer.celebrate();
-      this.ui.showClear(this.stageIndex + 1 < STAGES.length, this.stageIndex + 1);
+      this.ui.showClear(i + 1 < STAGES.length, i + 1);
     }, 350);
   }
 
@@ -1075,11 +1127,17 @@ class Game {
     const r = this.puzzle.launch(id);
     if (r.ok) {
       this.renderer.launch(id);
+      this.launched.push(id);
       this.ui.setCount(this.puzzle.remaining);
-      if (r.cleared) this.onCleared();
+      if (r.cleared) {
+        this.onCleared();
+      } else {
+        this.progress.levels[this.stageIndex] = { seed: this.seed, removed: [...this.launched] };
+        this.save();
+      }
     } else if (r.reason === 'blocked') {
       this.renderer.flashBlocked(id, r.blockerId, r.cell);
-      if (navigator.vibrate) navigator.vibrate([25, 30, 25]); // 対応端末のみ振動
+      if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate([25, 30, 25]); // 対応端末のみ振動
     }
   }
 }
